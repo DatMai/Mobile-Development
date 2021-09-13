@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "1067047056856",
+    "firebase_url": "https://humanresourcemanager-57f05.firebaseio.com",
+    "project_id": "humanresourcemanager-57f05",
+    "storage_bucket": "humanresourcemanager-57f05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067047056856:android:561abec1d6b66685142ead",
+        "android_client_info": {
+          "package_name": "com.Fpoly.music143"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067047056856-0iko8bhq7fn5uou178o4jot6uq3iho4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Fpoly.music143",
+            "certificate_hash": "1c6a2b2d5c5e858274eb415e25796a9a4675af85"
+          }
+        },
+        {
+          "client_id": "1067047056856-p017rc5qhl989jbcomm69kdpgj9ts5th.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Fpoly.music143",
+            "certificate_hash": "6ff23f61740f99dec1e4d6597bb09f7387ba00db"
+          }
+        },
+        {
+          "client_id": "1067047056856-aeggo7mgdr57quguvjh5spvjaunueilj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRctOHz53hQ7UpVvX7dVkHVYeC2f43t5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067047056856-aeggo7mgdr57quguvjh5spvjaunueilj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067047056856:android:95b43e09d7ae455d142ead",
+        "android_client_info": {
+          "package_name": "com.Fpoly.music143"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067047056856-hg9agvnh5vol4nj58f6map4rofqvqjtt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Fpoly.music143",
+            "certificate_hash": "fcbc572f59724a9aaaeba3ea3cb4f819e9ac78c6"
+          }
+        },
+        {
+          "client_id": "1067047056856-aeggo7mgdr57quguvjh5spvjaunueilj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRctOHz53hQ7UpVvX7dVkHVYeC2f43t5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067047056856-aeggo7mgdr57quguvjh5spvjaunueilj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067047056856:android:274c2cf968d737c0142ead",
+        "android_client_info": {
+          "package_name": "com.example.testgglogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067047056856-aeggo7mgdr57quguvjh5spvjaunueilj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRctOHz53hQ7UpVvX7dVkHVYeC2f43t5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067047056856-aeggo7mgdr57quguvjh5spvjaunueilj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

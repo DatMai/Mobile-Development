@@ -1,0 +1,84 @@
+<html>
+<head>
+  <title>Firebase Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+
+  <div id="login_div" class="main-div">
+    <img src="images/imgherder.jpg" width="250" height="250" >
+    <h3>Login Music App</h3>
+    <form id="login">
+    <input type="email" placeholder="Email..." id="email" name="email"/>
+    <input type="password" placeholder="Password..." id="password" name="password" />
+    <button type="submit">Login to Account</button>
+  </form>
+
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      var firebaseConfig = {
+      apiKey: "AIzaSyBwCXhcUSv5JOrAy4sID2q1w19B6j-obbM",
+    authDomain: "humanresourcemanager-57f05.firebaseapp.com",
+    databaseURL: "https://humanresourcemanager-57f05.firebaseio.com",
+    projectId: "humanresourcemanager-57f05",
+    storageBucket: "humanresourcemanager-57f05.appspot.com",
+    messagingSenderId: "1067047056856",
+    appId: "1:1067047056856:web:a7f2b35fbde5e4a0142ead"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+
+
+      document
+        .getElementById("login")
+        .addEventListener("submit", (event) => {
+            event.preventDefault();
+          const email = event.target.email.value;
+          const password = event.target.password.value;
+
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(({ user }) => {
+              return user.getIdToken().then((idToken) => {
+                return fetch("/sessionLogin", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                  },
+                  body: JSON.stringify({ idToken }),
+                });
+              });
+            })
+            .then(() => {
+              return firebase.auth().signOut();
+            })
+            .then(() => {
+              window.location.assign("/index");
+            });
+          return false;
+        });
+
+
+    });
+  </script>
+  <!-- <script src="index.js"></script> -->
+
+</body>
+</html>

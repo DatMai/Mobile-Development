@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#00ACC1</color>
+    <color name="blue_white">#00ACC1</color>
+    <color name="blue_black">#00ACC1</color>
+    <color name="colorAccent">#00ACC1</color>
+    <color name="primaryTitleColor">#000000</color>
+    <color name="gray_white">@color/text_color_dark</color>
+    <color name="colorPrimaryNight">#00ACC1</color>
+    <color name="bottom">#FFFFFF</color>
+
+
+
+
+    <color name="flatOrange">#FF9500</color>
+    <color name="white">#FFF</color>
+    <color name="blue">#00ACC1</color>
+    <color name="black">#000000</color>
+    <color name="background">#d6d2c9</color>
+    <color name="mautim">#a845de</color>
+    <color name="yellow">#ded00d</color>
+    <color name="red">#D32F2F</color>
+    <color name="com_facebook_button_send_background_color_pressed">#ded00d</color>
+    <color name="com_facebook_button_background_color_focused">#ded00d</color>
+    <color name="com_facebook_button_background_color_disabled">#ded00d</color>
+    <color name="com_facebook_button_background_color_focused_disabled">#ded00d</color>
+    <color name="com_facebook_button_border_color_focused">#ded00d</color>
+    <color name="textColor">#FFFFFF</color>
+
+    <color name="colorPrimaryDarkNight">#141d26</color>
+    <color name="colorAccentNight">#ffffff</color>
+
+
+    <color name="primaryTitleColorNight">#ffffff</color>
+    <color name="white_black">#FFFFFF</color>
+    <color name="hashTag">#2DA6FF</color>
+
+</resources>

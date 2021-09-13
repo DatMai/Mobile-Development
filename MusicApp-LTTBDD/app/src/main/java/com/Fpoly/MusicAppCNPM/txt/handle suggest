@@ -1,0 +1,32 @@
+// handle random
+                            int counter = suggestList.size()-1;
+                            for(int i = 0; i < counter ; i++){
+                                double random = Math.random();
+                                double index = Math.round(random * i * 10);
+                                if(index < counter){
+                                    suggestList.set(i, suggestList.get((int) index));
+                                    Log.d("suggest",suggestList.get(i).getName()) ;
+                                }
+                            }
+                            songCallBack.getCallBack(new ArrayList<>(suggestList.subList(0,5)));
+                        } else {
+                            Log.w("AAA", "Error getting documents.", task.getException());
+                            ToastAnnotation("Có Lỗi Xảy Ra");
+                        }
+                    }
+                });
+    }
+
+
+      int songListSize = suggestList.size();
+                                ArrayList<Song> randomsongList = new ArrayList<>();
+                                for(int i = 0; i < songListSize; i++) {
+                                    Song randomsong = suggestList.get(new Random().nextInt(songListSize));
+                                    if(!randomsongList.contains(randomsong)) {
+                                        randomsongList.add(randomsong);
+                                        if(randomsongList.size() == 5) {
+                                            break;
+                                        }
+                                    }
+                                }
+                                songCallBack.getCallBack(randomsongList);

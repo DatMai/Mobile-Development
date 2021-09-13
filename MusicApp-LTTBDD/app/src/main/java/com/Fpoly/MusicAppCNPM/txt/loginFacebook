@@ -1,0 +1,146 @@
+package com.Fpoly.music143.Activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.Fpoly.music143.BuildConfig;
+import com.Fpoly.music143.Database.DAO.UserDAO;
+import com.Fpoly.music143.Database.Services.CallBack.SucessCallBack;
+import com.Fpoly.music143.Model.UserInfor;
+import com.facebook.AccessTokenTracker;
+import com.facebook.FacebookAuthorizationException;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+public class FacebookAccount extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private Boolean getToken;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CallbackManager mCallbackManager;
+    UserInfor userInfor = UserInfor.getInstance();
+    // testcomit
+
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private AccessTokenTracker accessTokenTracker;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        getToken=getIntent().getBooleanExtra("getToken",false);
+        mAuth = FirebaseAuth.getInstance();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+
+        mCallbackManager = CallbackManager.Factory.create();
+
+//        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+        LoginManager.getInstance().registerCallback(mCallbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d("devS", "onSuccess" + loginResult);
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        finish();// App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        if (exception instanceof FacebookAuthorizationException) {
+                            if (AccessToken.getCurrentAccessToken() != null) {
+                                LoginManager.getInstance().logOut();
+                            }
+                        }
+                        Log.e("error",exception.toString());
+                        finish();
+                    }
+                });
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
+        Log.d("devS",accessToken.getToken()) ;
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+//            mAuth.getCurrentUser().unlink(mAuth.getCurrentUser().getProviderId());
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("devS","succsess") ;
+                            } else {
+                                Log.d("devS","error") ;
+                            }
+
+                        }
+                    });
+        if(mAuth.getCurrentUser()!=null){
+            mAuth.signOut();
+        }
+        }
+
+
+    private void updateUI(final FirebaseUser user){
+
+        db.collection("Users")
+                .whereEqualTo( "email", mAuth.getCurrentUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Log.d("devH", String.valueOf(task.isSuccessful()));
+                        if (task.isSuccessful()) {
+                            if(task.getResult().getDocuments().size() == 0){
+                                userInfor = new UserInfor(mAuth.getCurrentUser().getUid(),mAuth.getCurrentUser().getDisplayName(),null,"",mAuth.getCurrentUser().getEmail(),false,false) ;
+                                userInfor.setID(mAuth.getCurrentUser().getUid());
+                                Log.d("devH", userInfor.getID());
+                                db.collection("Users").document(mAuth.getCurrentUser().getUid()).set(userInfor);
+                            }
+
+                        } else {
+                            Log.d("devH", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        finish();
+            }
+
+}
+

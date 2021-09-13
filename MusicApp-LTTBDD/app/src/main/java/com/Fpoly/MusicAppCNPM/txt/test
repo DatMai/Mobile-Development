@@ -1,0 +1,140 @@
+         /*    //Khi nhấn vào nút yêu thích(trái tim)
+                   imgbtnlike.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           if(isFavorites){
+                               ItemFavorites(mangbaihat.get(position).getID(),false);
+                           }else{
+                               ItemFavorites(mangbaihat.get(position).getID(),true);
+                           }
+                       }
+                   });
+                   imgbtnplaylist.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           addPlayList(mangbaihat.get(0).getID());
+                       }
+                   });*/
+
+
+   @Override
+    public void onResume() {
+        super.onResume();
+        GetUser();
+    }
+
+
+
+
+    // LyfeCycle
+    @Override
+    protected void onStart() {
+        Log.d("main","onStart") ;
+        super.onStart();
+    }
+    @Override
+    protected void onDestroy() {
+        Log.d("main","finish") ;
+        super.onDestroy();
+    }
+
+     imgbtnlike.setImageResource(R.drawable.ic_favorite_black_24dp);
+     imgbtnlike.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+
+
+
+   /* if(userInfor.getUsername()!=null){
+             Fragment fragment = new PlaylistFragment();
+             Log.d("chuyenPlaylist",mangbaihat.size() + "") ;
+             Log.d("chuyenPlaylist",position + "") ;
+             Bundle bundle = new Bundle();
+             bundle.putBoolean("AddMusic",true);
+             bundle.putParcelableArrayList("mangbaihatPlayList",mangbaihat);
+             bundle.putInt("Position",position);
+             fragment.setArguments(bundle);
+             userInfor.setTempID(ID);
+             // change Fragment Playlist
+             FragmentTransaction ft = getFragmentManager().beginTransaction();
+             ft.setCustomAnimations(R.anim.slide_out_left,R.anim.slide_in_right);
+             AppCompatActivity activity = (AppCompatActivity) view.getContext();
+             activity.getSupportFragmentManager().beginTransaction().replace(R.id.cointainmusic, fragment).commit();
+ //            BottomSheetBehavior
+             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+             mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+             @Override
+             public void onStateChanged(@NonNull View bottomSheet, int newState) {
+
+             }
+
+             @Override
+             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                 // React to dragging events
+             }
+             });
+
+         }else{
+             Toast.makeText(getContext(),"Bạn Cần Đăng Nhập Để Thực Hiện Chức Năng Này",Toast.LENGTH_SHORT).show();
+         }*/
+
+
+  public void showBottomSheetDialogFragment() {
+
+ }
+
+
+  Picasso.get().load(mangbaihat.get(CurrentPosition).getImage()).into(songs_cover_one);
+                songs_title.setText(mangbaihat.get(CurrentPosition).getName());
+                songs_artist_name.setText(mangbaihat.get(CurrentPosition).getSinger());
+
+
+  /*LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                 new IntentFilter("custom-event-name"));
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+         @Override
+         public void onReceive(Context context, Intent intent) {
+             // Get extra data included in the Intent
+             String message = intent.getStringExtra("message");
+             Log.d("receiver", "Got message: " + message);
+             slidingUpPanelLayout() ;
+         }
+     };*/
+
+
+
+  /*
+     UserInfor userInfor = UserInfor.getInstance();
+     PlayMusicFragment playMusicFragment = new PlayMusicFragment();
+     MusicService musicService ;
+     private String TAG = "MainActivity" ;
+     FragmentManager fragmentManager;*/
+
+
+
+ try {
+                            fragment_dia_nhac.Playnhac(mangbaihat.get(0).getImage());
+                        } catch (Exception handleslow) {System.out.println(handleslow);}
+
+
+                              Log.e("stop", String.valueOf(stop)) ;
+                                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                                    StrictMode.setThreadPolicy(policy);
+                                    try {
+                                        if (mediaPlayer.isPlaying()) {
+                                            mediaPlayer.stop();
+                                            mediaPlayer.release();
+                                        }
+                                    } catch (Exception e) {}
+
+
+                                    //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                                    //            @Override
+                                    //            public void onClick(View view) {
+                                    //                stop = true;
+                                    //                mangbaihat.clear();
+                                    //                mediaPlayer.stop();
+                                    //                changeFragment();
+
+                                    //            }
+                                    //        });
+
+                                    //            mediaPlayer = MusicService.mediaPlayer;

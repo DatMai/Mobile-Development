@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/playMusicFragment_fragment"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="#FFFFFF"
+android:weightSum="10">
+
+<Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:title="Enjoy Your Time"
+    android:background="@color/colorPrimaryDark"
+    android:titleTextColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_favorite_black_24dp"
+            android:background="@color/colorPrimaryDark"
+            android:tint="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/imgbtnlike">
+        </ImageButton>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_playlist_add_black_24dp"
+            android:background="@color/colorPrimaryDark"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/imgbtnplaylist">
+        </ImageButton>
+    </LinearLayout>
+</Toolbar>
+<androidx.viewpager.widget.ViewPager
+    android:id="@+id/vpPlaynhac"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="8">
+</androidx.viewpager.widget.ViewPager>
+<com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+    android:paddingBottom="10dp"
+    android:layout_gravity="center"
+    android:id="@+id/dotsIndicator_music"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:dotsColor="@color/primaryTitleColor"
+    app:dotsCornerRadius="8dp"
+    app:dotsSize="10dp"
+    app:dotsSpacing="4dp"
+    app:dotsWidthFactor="2.5"
+    app:selectedDotColor="#00ACC1"
+    app:progressMode="false" />
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_weight="2"
+    android:layout_width="match_parent"
+    android:layout_height="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <TextView
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="00:00"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:id="@+id/tvtimesong"
+            android:textColor="@color/primaryTitleColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <SeekBar
+            android:id="@+id/sbsong"
+            android:layout_weight="9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="00:00"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:id="@+id/tvtotaltimesong"
+            android:textColor="@color/primaryTitleColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/imgbtnsuffle"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_shuffle_black_24dp"/>
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/imgbtnpre"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_skip_previous_black_24dp"/>
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/imgbtnplay"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_play"/>
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/imgbtnnext"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_skip_next_black_24dp"/>
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/imgbtnrepeat"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_loop_black_24dp"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+</LinearLayout>

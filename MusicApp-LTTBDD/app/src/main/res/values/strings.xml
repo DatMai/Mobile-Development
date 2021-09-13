@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Music14.3</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Trang Chủ</string>
+    <string name="title_dashboard">Tìm Kiếm</string>
+    <string name="title_notifications">Cá Nhân</string>
+    <!--    <string name="facebook_app_id">260833728143728</string>-->
+    <!--    <string name="fb_login_protocol_scheme">fb260833728143728</string>-->
+
+    <string name="facebook_app_id">3334894699942911</string>
+    <string name="fb_login_protocol_scheme">fb3334894699942911</string>
+    <string name="search_hint">Nhập Tên Bài Hát</string>
+    <string name="text">Light Mode</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

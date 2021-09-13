@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginBottom="5dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:id="@+id/pre_layout">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/imgrank"
+            android:scaleType="fitXY"
+            android:layout_margin="3dp"
+            android:layout_width="40dp"
+            android:layout_height="37dp"
+            android:src="@drawable/top5"/>
+        <TextView
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            android:text="1"
+            android:id="@+id/tvindex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/parent_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_toRightOf="@id/pre_layout" >
+
+         <ImageView
+            android:id="@+id/imgsong"
+            android:scaleType="fitXY"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+    </androidx.cardview.widget.CardView>
+
+
+     <TextView
+         android:text="Tên bài hát"
+         android:textSize="18sp"
+         android:textColor="@color/primaryTitleColor"
+         android:ellipsize="end"
+         android:maxLines="1"
+         android:layout_toRightOf="@id/parent_layout"
+         android:layout_marginTop="7dp"
+         android:layout_marginLeft="5dp"
+         android:id="@+id/tvsongname"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"/>
+    <TextView
+        android:textColor="#8c8a8a"
+        android:textSize="18sp"
+        android:text="Ca sĩ"
+        android:singleLine="true"
+        android:layout_toRightOf="@id/parent_layout"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/tvsongname"
+        android:id="@+id/tvsongsinger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/like_layout"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvsongsinger"
+        android:layout_alignBottom="@+id/parent_layout"
+        android:layout_alignLeft="@id/tvsongsinger"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLike"
+            android:textColor="#00ACC1"
+            android:text="1000"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lượt Thích"/>
+    </LinearLayout>
+</RelativeLayout>

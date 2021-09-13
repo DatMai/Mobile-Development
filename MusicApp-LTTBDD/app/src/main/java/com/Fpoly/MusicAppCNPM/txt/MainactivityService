@@ -1,0 +1,196 @@
+package com.Fpoly.music143.Activity;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.support.v4.media.session.MediaSessionCompat;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
+
+import com.Fpoly.music143.Database.DAO.UserDAO;
+import com.Fpoly.music143.Database.Services.CallBack.UserCallBack;
+import com.Fpoly.music143.Fragment.Music.Adapter.ViewPagerPlayListNhac;
+import com.Fpoly.music143.Fragment.Music.BackgroundSoundService;
+import com.Fpoly.music143.Fragment.Music.Fragment_Dia_Nhac;
+import com.Fpoly.music143.Fragment.Music.Fragment_Play_Danh_Sach_Cac_Bai_Hat;
+import com.Fpoly.music143.Fragment.Music.Notification.MusicService;
+import com.Fpoly.music143.Fragment.Music.PlayMusicFragment;
+import com.Fpoly.music143.Model.Song;
+import com.Fpoly.music143.Model.UserInfor;
+import com.Fpoly.music143.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.sothree.slidinguppanel.ScrollableViewHelper;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.ViewPager;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+    private SlidingUpPanelLayout slidingUpPanelLayout;
+    UserInfor userInfor = UserInfor.getInstance();
+    BottomNavigationView bottomNavigationView ;
+    PlayMusicFragment playMusicFragment ;
+    ImageButton play_button,pause_button;
+    BackgroundSoundService backgroundSoundService = new BackgroundSoundService();
+
+
+    public static ArrayList<Song> mangbaihat = new ArrayList<>();
+    public static ViewPagerPlayListNhac viewPagerPlayListNhac;
+    Fragment_Dia_Nhac fragment_dia_nhac;
+    Fragment_Play_Danh_Sach_Cac_Bai_Hat fragment_play_danh_sach_cac_bai_hat;
+    TextView txttimesong,txttotaltimesong;
+    SeekBar sktime;
+    ImageButton imgbtnsuffle,imgbtnpre,imgbtnplay,imgbtnnext,imgbtnrepeat,imgbtnlike,imgbtnplaylist;
+    Toolbar toolbar;
+    ViewPager viewpagerplaynhac;
+    MediaPlayer mediaPlayer;
+    int fragment;
+    int CurrentPosition;
+    Fragment oldFragment;
+    boolean stop = false  ;
+    int position = 0 ;
+    boolean repeat = false;
+    boolean checkrandom = false;
+    boolean next = false;
+    Boolean isFavorites=false;
+    MediaSessionCompat mediaSession;
+    MusicService musicService;
+    BottomNavigationView navBar ;
+    private DotsIndicator dotsIndicator_music;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        bottomNavigationView = findViewById(R.id.nav_view);
+        slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingUpPanel);
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        getUser(userInfor.getID());
+
+        // COLLAPSED: xup do
+        slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        slidingUpPanelLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+                slideDown(bottomNavigationView,slideOffset);
+            }
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+
+            }
+        }) ;
+
+        // call service
+        Intent intent = new Intent(MainActivity.this, BackgroundSoundService.class);
+        bindService(intent,serviceConnection, Context.BIND_AUTO_CREATE);
+        unbindService(serviceConnection);
+
+        play_button = findViewById(R.id.play_button) ;
+        pause_button = findViewById(R.id.pause_button) ;
+
+
+
+
+        play_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("baihat",BackgroundSoundService.baihat.getLink()) ;
+                backgroundSoundService.playmusic(BackgroundSoundService.baihat.getLink());
+                Toast.makeText(MainActivity.this,"Song Is now Playing",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    public ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            BackgroundSoundService.BinderExample binder = (BackgroundSoundService.BinderExample) iBinder;
+            backgroundSoundService = binder.getService();
+            Toast.makeText(MainActivity.this, "Connected", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    // slideDown bottom
+    private void slideDown(BottomNavigationView child, float slideOffset) {
+        float heigh_to_animate = slideOffset * child.getHeight();
+        ViewPropertyAnimator animator = child.animate();
+        animator
+                .translationY(heigh_to_animate)
+                .setInterpolator(new DecelerateInterpolator())
+                .setDuration(0)
+                .start();
+    }
+
+    // onBackPressed
+    @Override
+    public void onBackPressed() {
+        if (slidingUpPanelLayout != null &&
+                (slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED || slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED)) {
+            slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    // check user
+    private void getUser(final String userID) {
+        final UserDAO userDAO = new UserDAO(MainActivity.this);
+        userDAO.getUser(userID, new UserCallBack() {
+            @Override
+            public void getCallback(ArrayList<UserInfor> userInfors) {
+//                Log.d("test", userInfors.get(0).toString());
+                if(userInfors.size()>0){
+                    userInfor.setUsername(userInfors.get(0).getUsername());
+                    Log.d("test", userInfors.get(0).getUsername());
+                    userInfor.setEmail(userInfors.get(0).getEmail());
+                    userInfor.setFavorites(userInfors.get(0).getFavorites());
+                    userInfor.setLinkFaceBook(userInfors.get(0).getLinkFaceBook());
+                    userInfor.setLinkGmail(userInfors.get(0).getLinkGmail());
+                }else{
+                    Toast.makeText(MainActivity.this,"Bạn Chưa Có Tài Khoản hệ Thống, Vui Lòng Đăng Ký",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        });
+    }
+
+}
+
+

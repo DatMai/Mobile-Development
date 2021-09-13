@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#181818</color>
+    <color name="colorPrimaryDark">#202020</color>
+    <color name="blue_white">#FFFFFF</color>
+    <color name="blue_black">#202020</color>
+    <color name="colorAccent">#0091EA</color>
+    <color name="primaryTitleColor">#FFFFFF</color>
+    <color name="colorPrimaryNight">#181818</color>
+    <color name="bottom">#202020</color>
+    <color name="gray_white">#FFFFFF</color>
+    <color name="white_black">#181818</color>
+
+
+    <color name="colorPrimaryDarkNight">#141d26</color>
+    <color name="colorAccentNight">#ffffff</color>
+
+    <color name="primaryTitleColorNight">#ffffff</color>
+    <color name="hashTag">#2DA6FF</color>
+</resources>
